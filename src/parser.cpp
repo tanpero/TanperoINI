@@ -98,7 +98,7 @@ namespace ini
 	{
 	    file << "[" << it->first << "]" << std::endl;
 
-	    for (TMap<TString, TString>::iterator subIt = it.second.sub_node.begin(); ++subIt)
+	    for (TMap<TString, TString>::iterator subIt = it.second.sub_node.begin(); subIt != it->second.sub_node.end(); ++subIt)
 	    {
 		file << subIt->first << "=" << subIt->second << std::endl;
 	    }
@@ -110,5 +110,22 @@ namespace ini
 	return true;
     }
 
+    TVector<Node>::size_type Parser::setValue(TString root, TString key, TString value)
+    {
+	TMap<TString, SubNode>::iterator it = mapINI.find(root);
+	if (mapINI.end() != it)
+	{
+	    it->second.sub_node[key] = value;
+	}
+	else
+	{
+	    SubNode snode;
+	    snode.insert(key, value);
+	    mapINI.insert(TPair<TString, SubNode>(root, snode));
+	}
 
+	return mapINI.size();
+    }
+
+};
 

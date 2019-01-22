@@ -17,6 +17,7 @@ namespace ini
 	TVector<Node>::size_type getSize(){
 	    return mapINI.size();
 	}
+	TVector<Node>::size_type setValue(TString root, TString key, TString value);
 	int write(TString path);
 	void clear();
 	void travel();
