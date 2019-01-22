@@ -20,12 +20,12 @@ namespace ini
 	return s;
     }
 
-    void Parser::read(TString path)
+    bool Parser::read(TString path)
     {
 	std::ifstream file(path.c_str());
 
 	if (!file)
-	    return 0;
+	    return false;
 
 	TString line;
 	TString root;
@@ -77,10 +77,38 @@ namespace ini
 	}
 
 	mapINI.insert(TPair<TString, SubNode>(it->first, snode));
+
+	return true;
     }
-}
 
+    TString Parser::getValue(TString root, TString key)
+    {
+	TMap<TString, SubNode>::iterator it = mapINI.find(root);
+	TMap<TString, TString>::iterator subIt = it->second.sub_node.find(key);
+	return subIt->second.empty() ? "" : subIt.second;
+    }
 
+    bool Parser::write(TString path)
+    {
+	std::ofstream file(path.c_str());
+	if (!file)
+	    return false;
+
+	for (TMap<TString, SubNode>::iterator it = mapINI.begin(); it != mapINI.end(); ++it)
+	{
+	    file << "[" << it->first << "]" << std::endl;
+
+	    for (TMap<TString, TString>::iterator subIt = it.second.sub_node.begin(); ++subIt)
+	    {
+		file << subIt->first << "=" << subIt->second << std::endl;
+	    }
+	}
+
+	file.close();
+	file.clear();
+
+	return true;
+    }
 
 
 
