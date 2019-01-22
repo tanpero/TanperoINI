@@ -36,7 +36,7 @@ namespace ini
 	    TString::size_type leftPos = 0;
 	    TString::size_type rightPos = 0;
 	    TString::size_type equalDivPos = 0;
-	    TString strKey.strValue;
+	    TString strKey, strValue;
 
 	    if ((line.npos != (leftPos = line.find("["))) && (line.npos != (rightPos = line.find("]"))))
 	    {
