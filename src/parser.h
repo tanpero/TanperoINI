@@ -20,7 +20,6 @@ namespace ini
 	TVector<Node>::size_type setValue(TString root, TString key, TString value);
 	int write(TString path);
 	void clear();
-	void travel();
     private:
     	TMap<TString, SubNode> mapINI;
     };
