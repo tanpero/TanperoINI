@@ -13,7 +13,7 @@ namespace ini
     TString& trim(TString& s)
     {
 	TString::size_type pos = 0;
-	while (s.npos != (pos.find(" ")))
+	while (s.npos != (s.find(" ")))
 	{
 	    s = s.replace(pos, pos + 1, "");
 	}

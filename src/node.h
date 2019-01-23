@@ -30,7 +30,7 @@ namespace ini
     public:
     	void insert(TString key, TString value)
 	{
-	    subNode.insert(TPair<TString, TString>(key, value);
+	    subNode.insert(TPair<TString, TString>(key, value));
 	}
 	TMap<TString, TString> subNode;
     };
